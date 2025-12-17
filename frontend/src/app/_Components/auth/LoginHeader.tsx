@@ -1,16 +1,22 @@
+import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-
-export const LoginHeader = () => {
+export type HeaderProps={
+title:string;
+text:string;
+};
+export const LoginHeader = (props:HeaderProps) => {
   return (
-    <div className=" w-full bg-amber-300 flex flex-col justify-center">
-      <div className="pl-30 flex flex-col gap-6">
-        <div className="w-6 h-6 border border-gray-200 flex justify-center items-center rounded-[6px]">
-          <ChevronLeft size={12} />
-        </div>
+    <div className=" w-full flex flex-col justify-center">
+      <div className=" flex flex-col gap-6">
+         <Button variant="default"
+                  className="w-10 bg-background border border-gray-200 text-black hover:bg-accent"
+                >
+                  <ChevronLeft />
+                </Button>
         <div>
-          <h3 className="font-semibold text-3xl">Create your account</h3>
+          <h3 className="font-semibold text-3xl">{props.title}</h3>
           <p className="text-gray-400 text-[24px]">
-            Sign up to explore your favorite dishes.
+            {props.text}
           </p>
         </div>
       </div>

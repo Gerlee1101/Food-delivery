@@ -12,8 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { LoginHeader } from "./LoginHeader";
 const formSchema = z.object({
   email: z.email({
     error: (issue) =>
@@ -44,18 +44,7 @@ export default function Login() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <Button
-                  variant="default"
-                  className="w-10 bg-background border border-gray-200 text-black hover:bg-accent mb-5"
-                >
-                  <ChevronLeft />
-                </Button>
-                <FormLabel className="font-semibold text-4xl">
-                  Create your account
-                </FormLabel>
-                <FormDescription className="text-2xl">
-                  Sign up to explore your favorite dishes.
-                </FormDescription>
+                <LoginHeader title={`Create your account `} text={`Sign up to explore your favorite dishes.`} />
                 <FormControl className="mt-6 pt-6 pb-6 ">
                   <Input placeholder="Enter your email address" {...field} />
                 </FormControl>
