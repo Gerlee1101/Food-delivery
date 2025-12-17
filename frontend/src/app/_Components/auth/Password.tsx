@@ -44,6 +44,7 @@ export default function Password() {
                 <FormControl className="mt-6 pt-6 pb-6 ">
                   <Input placeholder="Enter Password" {...field} />
                   <Input placeholder="Enter Confirm Password"{...field}/>
+                  <Button variant="default" >Show</Button>
                 </FormControl>
 <Check/>
                 <FormMessage />
