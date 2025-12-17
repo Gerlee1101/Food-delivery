@@ -10,27 +10,39 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Check } from "lucide-react";
+import { Check, CheckCheck } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { LoginHeader } from "./LoginHeader";
-const formSchema = z.object({
-  password: z.string().min(8).max(20),
-  confirmPassword:z.string().min(8).max(20),
+import { useContext } from "react";
+import { StepContext } from "@/app/signUp/page";
+const formSchema = z
+  .object({
+    password: z.string().min(8).max(20),
+    confirmPassword: z.string().min(8).max(20),
   })
+  .refine((data) => data.password === data.confirmPassword, {
+    error: "Passwords do not match",
+  });
 export default function Password() {
+  const { data, handleNext, handleBack, setData } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      password: "",
-      confirmPassword:"",
+      password: data.password,
+      confirmPassword: data.confirmPassword,
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
+    setData((prev) => ({
+      ...prev,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    }));
+    console.log(values);
+    handleNext;
+    handleBack;
   }
-  const handleLetsGo = () => {};
   return (
     <div className="w-[40%] pl-25">
       <Form {...form}>
@@ -40,27 +52,33 @@ export default function Password() {
             name="password"
             render={({ field }) => (
               <FormItem>
-               <LoginHeader title={`Create a strong password`} text={`Create a strong password with letters, numbers.`}/>
-                <FormControl className="mt-6 pt-6 pb-6 ">
-                  <Input placeholder="Enter Password" {...field} />
-                  <Input placeholder="Enter Confirm Password"{...field}/>
-                  <Button variant="default" >Show</Button>
+                <LoginHeader
+                  title={`Create a strong password`}
+                  text={`Create a strong password with letters, numbers.`}
+                />
+                <FormControl className="mt-6 ">
+                  <Input
+                    placeholder="Enter Password"
+                    {...field}
+                    className="pt-6 pb-6"
+                  />
                 </FormControl>
-<Check/>
                 <FormMessage />
               </FormItem>
             )}
           />
-           <FormField
+          <FormField
             control={form.control}
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-               
-                <FormControl className="mt-6 pt-6 pb-6 ">
-                  <Input placeholder="Enter your email address" {...field} />
+                <FormControl className=" pb-6 ">
+                  <Input
+                    placeholder="Enter confirm password"
+                    {...field}
+                    className="pt-6 pb-6"
+                  />
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}

@@ -14,9 +14,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { LoginHeader } from "./LoginHeader";
-import { useContext } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import { StepContext } from "@/app/signUp/page";
-import Password from "./Password";
 const formSchema = z.object({
   email: z.email({
     error: (issue) =>
@@ -24,26 +29,14 @@ const formSchema = z.object({
         ? "Email field is required"
         : "Invalid email. Use a format like example@email.com",
   }),
-  password: z
-    .string()
-    .min(
-      8,
-      "It must contain uppercase and lowercase letters, numbers, and be at least 8 characters long."
-    )
-    .max(50)
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-      "It must contain uppercase and lowercase letters, numbers, and be at least 8 characters long."
-    ),
 });
 
-export default function Login() {
+export default function CreateAccount() {
   const { data, handleNext, setData } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: data.email,
-      password: data.password,
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -51,7 +44,6 @@ export default function Login() {
     setData((prev) => ({
       ...prev,
       email: values.email,
-      password: values.password,
     }));
     handleNext();
   }
@@ -66,8 +58,8 @@ export default function Login() {
             render={({ field }) => (
               <FormItem>
                 <LoginHeader
-                  title={`Log in  `}
-                  text={`Log in to enjoy your favorite dishes.`}
+                  title={`Create your account `}
+                  text={`Sign up to explore your favorite dishes.`}
                 />
                 <FormControl className="mt-6 pt-6 pb-6 ">
                   <Input placeholder="Enter your email address" {...field} />
@@ -76,31 +68,12 @@ export default function Login() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl className="mt-6 pt-6 pb-6 ">
-                  <Input placeholder="Password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button variant="link">Forget password</Button>
           <Button
             type="submit"
             className="w-full pt-6 pb-6 text-xl bg-gray-300"
           >
             Let's Go
           </Button>
-          <div className="flex gap-3">
-            <p>Don’t have an account?</p>{" "}
-            <a href="#" className="underline-offset-0">
-              Sign up{" "}
-            </a>
-          </div>
         </form>
       </Form>
     </div>
