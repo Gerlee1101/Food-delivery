@@ -51,13 +51,13 @@ export default function Home() {
   const router = useRouter();
   const handleNext = () => {
     if (step < 2) {
-      setStep((prev) => prev + 1);
+      setStep((prev) => Math.max(prev + 1, 2));
     } else {
       router.push("/login");
     }
   };
   const handleBack = () => {
-    setStep((prev) => Math.max(prev - 1, 1));
+    setStep((prev) => Math.min(prev - 1, 1));
   };
   return (
     <StepContext.Provider
@@ -67,6 +67,7 @@ export default function Home() {
         <div className="w-full flex gap-10 items-center">
           {step === 1 && <CreateAccount />}
           {step === 2 && <Password />}
+
           <Image
             className="w-[60%] h-full object-cover rounded-3xl"
             src="/homepage/5d86e6a2488bb31d983ecd581caec983f3a32842 copy.jpg"

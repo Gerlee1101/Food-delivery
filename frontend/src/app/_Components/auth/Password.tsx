@@ -10,11 +10,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Check, CheckCheck } from "lucide-react";
+import { Check, CheckCheck, ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { LoginHeader } from "./LoginHeader";
 import { useContext } from "react";
 import { StepContext } from "@/app/signUp/page";
+import { useRouter } from "next/navigation";
 const formSchema = z
   .object({
     password: z.string().min(8).max(20),
@@ -24,7 +25,8 @@ const formSchema = z
     error: "Passwords do not match",
   });
 export default function Password() {
-  const { data, handleNext, handleBack, setData } = useContext(StepContext);
+  const router = useRouter();
+  const { data, handleBack, setData } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,14 +36,15 @@ export default function Password() {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    setData((prev) => ({
-      ...prev,
-      password: values.password,
-      confirmPassword: values.confirmPassword,
-    }));
+    // setData((prev) => ({
+    //   ...prev,
+    //   password: values.password,
+    //   confirmPassword: values.confirmPassword,
+    // }));
     console.log(values);
-    handleNext;
+    // handleNext;
     handleBack;
+    router.push("/login");
   }
   return (
     <div className="w-[40%] pl-25">
@@ -52,6 +55,14 @@ export default function Password() {
             name="password"
             render={({ field }) => (
               <FormItem>
+                <Button
+                  variant="default"
+                  type="button"
+                  className="w-10 bg-background border border-gray-200 text-black hover:bg-accent mb-8"
+                  onClick={handleBack}
+                >
+                  <ChevronLeft />
+                </Button>
                 <LoginHeader
                   title={`Create a strong password`}
                   text={`Create a strong password with letters, numbers.`}

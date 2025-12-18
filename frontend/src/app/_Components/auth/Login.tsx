@@ -17,6 +17,7 @@ import { LoginHeader } from "./LoginHeader";
 import { useContext } from "react";
 import { StepContext } from "@/app/signUp/page";
 import Password from "./Password";
+import { ChevronLeft } from "lucide-react";
 const formSchema = z.object({
   email: z.email({
     error: (issue) =>
@@ -38,33 +39,34 @@ const formSchema = z.object({
 });
 
 export default function Login() {
-  const { data, handleNext, setData } = useContext(StepContext);
+  const { handleBack } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: data.email,
-      password: data.password,
+      email: "",
+      password: "",
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    setData((prev) => ({
-      ...prev,
-      email: values.email,
-      password: values.password,
-    }));
-    handleNext();
   }
 
   return (
     <div className="w-[40%] pl-25">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
+                <Button
+                  variant="default"
+                  type="button"
+                  className="w-10 bg-background border border-gray-200 text-black hover:bg-accent mb-8"
+                >
+                  <ChevronLeft />
+                </Button>
                 <LoginHeader
                   title={`Log in  `}
                   text={`Log in to enjoy your favorite dishes.`}
@@ -81,7 +83,7 @@ export default function Login() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormControl className="mt-6 pt-6 pb-6 ">
+                <FormControl className=" pt-6 pb-6 ">
                   <Input placeholder="Password" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -95,10 +97,10 @@ export default function Login() {
           >
             Let's Go
           </Button>
-          <div className="flex gap-3">
+          <div className="flex gap-3 justify-center">
             <p>Don’t have an account?</p>{" "}
-            <a href="#" className="underline-offset-0">
-              Sign up{" "}
+            <a href="#" className="underline-offset-0 text-blue-500">
+              Sign up
             </a>
           </div>
         </form>

@@ -25,6 +25,7 @@ import { createContext, Dispatch, SetStateAction, useState } from "react";
 import Password from "../_Components/auth/Password";
 import { LoginHeader } from "../_Components/auth/LoginHeader";
 import Login from "../_Components/auth/Login";
+// import Login from "../_Components/auth/Login";
 type StepContextType = {
   handleNext: () => void;
   handleBack: () => void;
@@ -49,7 +50,7 @@ export default function Home() {
     confirmPassword: "",
   });
   const handleNext = () => {
-    setStep((prev) => Math.min(prev + 1, 4));
+    setStep((prev) => Math.min(prev + 1, 2));
   };
   const handleBack = () => {
     setStep((prev) => Math.max(prev - 1, 1));
