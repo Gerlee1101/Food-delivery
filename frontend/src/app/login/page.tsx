@@ -65,7 +65,7 @@ export default function Home() {
 
           <Image
             className="w-[60%] h-full object-cover rounded-3xl"
-            src="/homepage/5d86e6a2488bb31d983ecd581caec983f3a32842 copy.jpg"
+            src="/login/5d86e6a2488bb31d983ecd581caec983f3a32842 copy.jpg"
             alt="food-delivery-homepage-image"
             width={856}
             height={2000}

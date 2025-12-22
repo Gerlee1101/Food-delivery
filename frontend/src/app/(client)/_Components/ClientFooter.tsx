@@ -29,6 +29,7 @@ export const ClientFooter = () => {
           <p className="text-white">Contact us</p>
           <p className="text-white">Delivery zone</p>
         </div>
+
         <div className="flex flex-col gap-5">
           <h1 className="text-gray-300">MENU</h1>
           <p className="text-white">Appetizers</p>

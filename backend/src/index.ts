@@ -1,10 +1,11 @@
 import express from "express";
+import { connectToDatabase } from "./database/index.js";
+
+await connectToDatabase;
 const app = express();
 app.get("/", (req, res) => {
-  res.send("hellodfsdfsdf");
+  res.send("hi");
 });
-app.post("/", (req, res) => {});
-const port = 4000;
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(4000, () => {
+  console.log(`example app listening on port 4000`);
 });
