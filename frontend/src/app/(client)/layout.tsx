@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-red-200 min-h-screen">
+    <div className="bg-gray-600 min-h-screen">
       <ClientHeader />
       {children}
       <ClientFooter />

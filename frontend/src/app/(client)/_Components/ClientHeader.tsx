@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@radix-ui/react-popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+
 import { ChevronRight, MapPin, ShoppingCart, User } from "lucide-react";
 
 export const ClientHeader = () => {
@@ -92,7 +89,7 @@ export const ClientHeader = () => {
             <User />
           </div>
         </div>
-      </div>
+      </div>≈
     </div>
   );
 };
