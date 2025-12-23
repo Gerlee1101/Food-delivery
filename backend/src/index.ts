@@ -1,11 +1,16 @@
 import express from "express";
 import { connectToDatabase } from "./database/index.js";
+import { FoodRouter } from "./routes/food.router.js";
 
-await connectToDatabase;
+await connectToDatabase();
 const app = express();
-app.get("/", (req, res) => {
-  res.send("hi");
-});
+// app.get("/", (req, res) => {
+//   res.send("hi");
+// });
+app.use(express.json());
+
+app.use(`/food`, FoodRouter);
+
 app.listen(4000, () => {
   console.log(`example app listening on port 4000`);
 });

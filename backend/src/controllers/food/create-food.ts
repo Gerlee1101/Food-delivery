@@ -1,0 +1,15 @@
+import type { RequestHandler } from "express";
+import { FoodModel } from "../../database/schema/food.schema.js";
+
+export const createFood: RequestHandler = async (req, res) => {
+  console.log({ req });
+
+  const body = req.body;
+  console.log({ body });
+
+  const food = await FoodModel.create({
+    name: body.name,
+    price: body.price,
+  });
+  res.status(201).json(food);
+};
