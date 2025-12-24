@@ -1,6 +1,6 @@
 import { FoodCard } from "./FoodCard";
 
-const foods = [
+export const foods = [
   {
     id: 1,
     title: "Burger",
@@ -51,11 +51,12 @@ const foods = [
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
 ];
-export const FoodSection=()=>{
-return(<>
-<div className="w-screen pl-22 pr-22 pt-12 pb-22">
+export const FoodSection = () => {
+  return (
+    <>
+      <div className="w-screen pl-22 pr-22 pt-12 pb-22">
         <h4 className="font-semibold text-[30px] pb-8">Appetizers</h4>
-        <div className="grid grid-cols-3 gap-10 ">
+        <div className="w-full grid grid-cols-3 gap-10 ">
           {foods.map((el) => {
             return (
               <FoodCard
@@ -69,5 +70,7 @@ return(<>
             );
           })}
         </div>
-      </div></>)
-}
+      </div>
+    </>
+  );
+};
