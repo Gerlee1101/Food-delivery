@@ -66,7 +66,43 @@ export const FoodCard = ({
   };
   const totalPrice = price * quantity;
   return (
-    <div>
+    <div className="relative">
+      <div className="absolute right-60">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label="Go Back"
+              className="absolute z-10 top-80 right-10 rounded-full"
+              onClick={handleClick}
+            >
+              {checked ? <Check /> : <Plus />}
+            </Button>
+          </PopoverTrigger>
+          {checked ? (
+            <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <h4 className="leading-none font-medium">
+                    Food is being added to the cart!
+                  </h4>
+                </div>
+              </div>
+            </PopoverContent>
+          ) : (
+            <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <h4 className="leading-none font-medium">
+                    Food is being deleted to the cart!
+                  </h4>
+                </div>
+              </div>
+            </PopoverContent>
+          )}
+        </Popover>
+      </div>
       <Dialog>
         <form>
           <DialogTrigger asChild>
@@ -80,40 +116,6 @@ export const FoodCard = ({
                     title={title}
                     className="w-full h-100 rounded-lg"
                   />
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        aria-label="Go Back"
-                        className="absolute z-10 top-80 right-10 rounded-full"
-                        onClick={handleClick}
-                      >
-                        {checked ? <Check /> : <Plus />}
-                      </Button>
-                    </PopoverTrigger>
-                    {checked ? (
-                      <PopoverContent className="w-80">
-                        <div className="grid gap-4">
-                          <div className="space-y-2">
-                            <h4 className="leading-none font-medium">
-                              Food is being added to the cart!
-                            </h4>
-                          </div>
-                        </div>
-                      </PopoverContent>
-                    ) : (
-                      <PopoverContent className="w-80">
-                        <div className="grid gap-4">
-                          <div className="space-y-2">
-                            <h4 className="leading-none font-medium">
-                              Food is being deleted to the cart!
-                            </h4>
-                          </div>
-                        </div>
-                      </PopoverContent>
-                    )}
-                  </Popover>
 
                   <div className="w-full p-3 h-27">
                     <div className="flex gap-1 items-center justify-between">
