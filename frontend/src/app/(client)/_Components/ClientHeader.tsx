@@ -27,7 +27,7 @@ export const ClientHeader = () => {
       <div className="w-screen h-fit bg-black pb-3 pl-22 pr-22 pt-3">
         <div className="flex  items-center justify-between ">
           <div className="flex">
-            <img src="/Screenshot 2024-12-17 at 18.02.18 1 (Traced).png" />
+            <img src="/Screenshot 2024-12-17 at 18.02.18 1 (Traced).png" className="w-[40px] h-[40px]" />
 
             <div className="pl-3">
               <span className="text-white font-semibold text-[20px]">
