@@ -6,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="flex h-screen bg-red-200">
       <AdminHeader />
       admin header
       {children}

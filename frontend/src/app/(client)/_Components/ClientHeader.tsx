@@ -9,13 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 
 import {
@@ -26,6 +19,7 @@ import {
   User,
 } from "lucide-react";
 import { CartDetail } from "./CartDetail";
+import { UserDetail } from "./UserDetail";
 
 export const ClientHeader = () => {
   return (
@@ -44,7 +38,7 @@ export const ClientHeader = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-3 z-20 justify-center items-center">
+          <div className="flex gap-3 justify-center items-center">
             <div>
               <Dialog>
                 <form>
@@ -84,13 +78,8 @@ export const ClientHeader = () => {
                 </form>
               </Dialog>
             </div>
-            
-              <CartDetail/>
-             
-          
-            <div className="bg-red-500 p-1.5 rounded-full">
-              <User />
-            </div>
+            <CartDetail />
+            <UserDetail />
           </div>
         </div>
       </div>
