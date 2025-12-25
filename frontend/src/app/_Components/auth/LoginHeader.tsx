@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
 export type HeaderProps = {
   title: string;
   text: string;

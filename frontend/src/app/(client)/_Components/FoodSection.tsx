@@ -56,7 +56,7 @@ export const FoodSection = () => {
     <>
       <div className="w-screen pl-22 pr-22 pt-12 pb-22">
         <h4 className="font-semibold text-[30px] pb-8">Appetizers</h4>
-        <div className="w-full grid grid-cols-3 gap-10 ">
+        <div className=" w-full grid grid-cols-3 gap-10 ">
           {foods.map((el) => {
             return (
               <FoodCard

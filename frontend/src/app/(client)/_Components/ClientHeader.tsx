@@ -25,11 +25,12 @@ import {
   ShoppingCart,
   User,
 } from "lucide-react";
+import { CartDetail } from "./CartDetail";
 
 export const ClientHeader = () => {
   return (
     <div className="w-screen relative ">
-      <div className="bg-black w-screen h-full pb-3 pl-22 pr-22 pt-3">
+      <div className="w-screen h-fit bg-black pb-3 pl-22 pr-22 pt-3">
         <div className="flex  items-center justify-between ">
           <div className="flex">
             <img src="/Screenshot 2024-12-17 at 18.02.18 1 (Traced).png" />
@@ -43,7 +44,7 @@ export const ClientHeader = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-3 z-20">
+          <div className="flex gap-3 z-20 justify-center items-center">
             <div>
               <Dialog>
                 <form>
@@ -68,8 +69,8 @@ export const ClientHeader = () => {
                         <Textarea
                           id="name-1"
                           name="name"
-                          className="text-gray-400 h-20  align-top"
-                          defaultValue="Please share your complete address"
+                          className="text-black h-20  align-top"
+                          placeholder="Please share your complete address"
                         />
                       </div>
                     </div>
@@ -83,9 +84,10 @@ export const ClientHeader = () => {
                 </form>
               </Dialog>
             </div>
-            <div className="bg-white p-1.5 rounded-full">
-              <ShoppingCart />
-            </div>
+            
+              <CartDetail/>
+             
+          
             <div className="bg-red-500 p-1.5 rounded-full">
               <User />
             </div>

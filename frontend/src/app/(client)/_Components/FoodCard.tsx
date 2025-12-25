@@ -21,7 +21,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-type FoodCardProps = {
+export type FoodCardProps = {
   id: number;
   //   backdrop_path: string;
   title: string;
@@ -46,7 +46,7 @@ export const FoodCard = ({
     if (open) {
       const timer = setTimeout(() => {
         setOpen(false);
-      }, 2500);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
@@ -66,8 +66,8 @@ export const FoodCard = ({
   };
   const totalPrice = price * quantity;
   return (
-    <div className="relative">
-      <div className="absolute right-60">
+    <div className="relative w-full">
+      <div className="absolute ">
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -103,14 +103,15 @@ export const FoodCard = ({
           )}
         </Popover>
       </div>
+      <div className="w-full ">
       <Dialog>
         <form>
           <DialogTrigger asChild>
-            <Button variant="outline" className="h-fit p-0 hover:bg-white">
-              <div className="bg-white rounded-lg pt-5 pl-5 pr-5 pb-5 relative cursor-pointer">
+            <Button variant="outline" className="h-full p-0 hover:bg-white">
+              <div className="bg-white rounded-lg pt-5 pl-5 pr-5 pb-5 cursor-pointer">
                 <div
                   key={id}
-                  className="relative rounded-lg overflow-hidden flex flex-col items-center"
+                  className="rounded-lg overflow-hidden "
                 >
                   <FoodImage
                     title={title}
@@ -177,6 +178,8 @@ export const FoodCard = ({
           </DialogContent>
         </form>
       </Dialog>
+      </div>
+   
       {/* <div className="bg-white rounded-lg  pt-5 pl-5 pr-5 pb-5 relative">
         <div
           key={id}
