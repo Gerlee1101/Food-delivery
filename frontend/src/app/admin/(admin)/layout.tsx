@@ -8,7 +8,6 @@ export default function RootLayout({
   return (
     <div className="flex min-h-screen">
       <AdminHeader />
-      admin header
       {children}
     </div>
   );
