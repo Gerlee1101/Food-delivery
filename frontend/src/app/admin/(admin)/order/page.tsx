@@ -13,7 +13,7 @@ import {
   type SortingState,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown, ChevronsDownUp, ChevronsUpDown, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -40,40 +40,64 @@ const data: Payment[] = [
   {
     id: "m5gr84i9",
     amount: 316,
-    status: "success",
+   deliveryState: "success",
     email: "ken99@example.com",
+    number:1,
+    date:"2024/12/12",
+     foods: ["Pizza", "Burger", "Cola"],
+     deliveryAddress:"adkjfa;jg;gj;d gja;d f8590347 238049 7t3984ty8395tj sd;fksldfks",
   },
   {
     id: "3u1reuv4",
     amount: 242,
-    status: "success",
+  deliveryState: "success",
     email: "Abe45@example.com",
+    number:2,
+    date:"2024/12/12",
+     foods: ["Pizza", "Cola"],
+     deliveryAddress:"jf;ksruwpourwopeur",
   },
   {
     id: "derv1ws0",
     amount: 837,
-    status: "processing",
+    deliveryState: "processing",
     email: "Monserrat44@example.com",
+    number:3,
+    date:"2024/12/12",
+     foods: [ "Cola"],
+     deliveryAddress:"gtriw-polnfmbn@@@poiuhdf",
   },
   {
     id: "5kma53ae",
     amount: 874,
-    status: "success",
+    deliveryState: "success",
     email: "Silas22@example.com",
+    number:4,
+    date:"2024/12/12",
+     foods: ["Pizza", "Burger"],
+     deliveryAddress:"kfja-wmv12324iw"
   },
   {
     id: "bhqecj4p",
     amount: 721,
-    status: "failed",
+  deliveryState: "failed",
     email: "carmella@example.com",
+    number:5,
+    date:"2024/12/12",
+     foods: ["huushuur"],
+     deliveryAddress:"lgkjel132u8294823"
   },
 ];
 
 export type Payment = {
   id: string;
   amount: number;
-  status: "pending" | "processing" | "success" | "failed";
+  deliveryState: "pending" | "processing" | "success" | "failed";
   email: string;
+  number:number;
+  foods:string[];
+  date:string;
+  deliveryAddress:string;
 };
 
 export const columns: ColumnDef<Payment>[] = [
@@ -100,12 +124,13 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey:"number",
+    header: "№",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{row.getValue("number")}</div>
     ),
   },
+ 
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -114,16 +139,31 @@ export const columns: ColumnDef<Payment>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Customer
           <ArrowUpDown />
         </Button>
       );
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
+   {
+    accessorKey:"foods",
+    header: "Food",
+    cell: ({ row }) => (
+       <div className="capitalize">
+        {row.getValue("foods")} foods</div>
+    ),
+  },
+  {
+    accessorKey:"date",
+    header: "Date",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("date")}</div>
+    ),
+  },
   {
     accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    header: () => <div className="text-right">Total</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"));
 
@@ -145,9 +185,9 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
+            <Button variant="ghost" className="h-8 w-8 p-0 bg-amber-200">
+              <span className="sr-only">Pending</span>
+              <ChevronsUpDown />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -164,6 +204,20 @@ export const columns: ColumnDef<Payment>[] = [
         </DropdownMenu>
       );
     },
+  },
+  {
+    accessorKey: "deliveryAddress",
+    header: "Delivery Address",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue(`deliveryAddress`)}</div>
+    ),
+  },
+    {
+    accessorKey: "deliveryState",
+    header: "Delivery state",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("deliveryState")}</div>
+    ),
   },
 ];
 
