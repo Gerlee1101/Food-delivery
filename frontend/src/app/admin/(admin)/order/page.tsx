@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronDown, ChevronsUpDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -26,6 +26,23 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 import { PagePagination } from "../_Components/PagePagination";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const data: Payment[] = [
   {
@@ -143,12 +160,21 @@ export default function Order(props: Payment) {
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
   const currentData = data.slice(startIndex, endIndex);
-  return (
-    <div className="w-full pt-6 pl-6 pb-8 pr-16 bg-amber-800">
-      <img src="/" className="w-7.5 h-7.5 rounded-full bg-amber-100  "></img>
+  const [orders, setOrders] = useState<Payment[]>(data);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedState, setSelectedState] = useState<
+    "pending" | "delivered" | "canceled" | null
+  >(null);
 
-      <div className="pt-6">
-        <div className="overflow-hidden rounded-md border">
+  return (
+    <div className="w-full pt-6 pl-6 pb-8 pr-16 bg-gray-100 relative">
+      <img
+        src="/"
+        className="w-7.5 h-7.5 rounded-full bg-amber-100 absolute right-20 "
+      ></img>
+
+      <div className="pt-16 ">
+        <div className="overflow-hidden rounded-md border bg-white">
           <div className="flex justify-between items-center pl-4 pr-4">
             <div>
               <div className="text-xl">Orders</div>
@@ -156,13 +182,71 @@ export default function Order(props: Payment) {
             </div>
             <div className="flex gap-5">
               <DatePicker />
+              <Dialog>
+                <form>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="rounded-full bg-black text-white border-none"
+                    >
+                      Change delivery state
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-106.25">
+                    <DialogHeader>
+                      <DialogTitle>Change delivery state</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex justify-between">
+                      <Button variant="outline" className="rounded-2xl">
+                        Delivered
+                      </Button>
+                      <Button variant="outline" className="rounded-2xl">
+                        Pending
+                      </Button>
+                      <Button variant="outline" className="rounded-2xl">
+                        Cancelled
+                      </Button>
+                    </div>
+                    {/* <div className="flex justify-between">
+                      <Button onClick={() => setSelectedState("delivered")}>
+                        Delivered
+                      </Button>
+                      <Button onClick={() => setSelectedState("pending")}>
+                        Pending
+                      </Button>
+                      <Button onClick={() => setSelectedState("canceled")}>
+                        Cancelled
+                      </Button>
+                    </div> */}
 
-              <Button
-                variant="outline"
-                className="rounded-full bg-black text-white border-none"
-              >
-                Change delivery state
-              </Button>
+                    <DialogFooter>
+                      <Button type="submit" className="w-full rounded-2xl">
+                        Save
+                      </Button>
+                      {/* <Button
+                        type="button"
+                        className="w-full rounded-2xl"
+                        onClick={() => {
+                          if (!selectedState) return;
+
+                          setOrders((prev) =>
+                            prev.map((order) =>
+                              selectedIds.includes(order.id)
+                                ? { ...order, deliveryState: selectedState }
+                                : order
+                            )
+                          );
+
+                          setSelectedIds([]);
+                          setSelectedState(null);
+                        }}
+                      >
+                        Save
+                      </Button> */}
+                    </DialogFooter>
+                  </DialogContent>
+                </form>
+              </Dialog>
             </div>
           </div>
           <Separator />
@@ -171,29 +255,65 @@ export default function Order(props: Payment) {
               <TableRow>
                 <TableHead>
                   <Checkbox />
+                  {/* <Checkbox
+                    checked={selectedIds.length === orders.length}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedIds(orders.map((o) => o.id));
+                      } else {
+                        setSelectedIds([]);
+                      }
+                    }}
+                  /> */}
                 </TableHead>
                 <TableHead>№</TableHead>
                 <TableHead>Customer</TableHead>
                 <TableHead>Food</TableHead>
                 <TableHead className="flex items-center ">
-                  Date <ChevronsUpDown />
+                  Date <ChevronsUpDown size={16} />
                 </TableHead>
                 <TableHead>Total</TableHead>
                 <TableHead>Delivery Address</TableHead>
                 <TableHead className="flex items-center">
-                  Delivery State <ChevronsUpDown />
+                  Delivery State <ChevronsUpDown size={16} />
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.slice(0, 3).map((el, index) => (
+              {data.map((el, index) => (
                 <TableRow key={el.id + index}>
                   <TableCell>
                     <Checkbox />
+                    {/* <Checkbox
+                      checked={selectedIds.includes(el.id)}
+                      onCheckedChange={(checked) => {
+                        if (checked) {
+                          setSelectedIds([...selectedIds, el.id]);
+                        } else {
+                          setSelectedIds(
+                            selectedIds.filter((id) => id !== el.id)
+                          );
+                        }
+                      }}
+                    /> */}
                   </TableCell>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{el.customer}</TableCell>
-                  <TableCell>{el.foods.length} foods</TableCell>
+                  <TableCell>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="bg-none hover:bg-none dark:hover:bg-none"
+                        >
+                          {el.foods.length} foods <ChevronDown />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        <div></div>
+                      </PopoverContent>
+                    </Popover>
+                  </TableCell>
                   <TableCell>{el.date}</TableCell>
                   <TableCell>${el.total.toFixed(2)}</TableCell>
                   <TableCell className="max-w-62.5 truncate">
@@ -211,6 +331,18 @@ export default function Order(props: Payment) {
                       </SelectContent>
                     </Select>
                   </TableCell>
+                  {/* <TableCell>
+                    <Select value={el.deliveryState}>
+                      <SelectTrigger className="w-35 rounded-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="delivered">Delivered</SelectItem>
+                        <SelectItem value="canceled">Canceled</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>
