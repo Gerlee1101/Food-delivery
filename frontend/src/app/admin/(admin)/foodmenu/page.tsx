@@ -1,6 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { DishCategory } from "../_Components/DishCategory";
+import { FoodCategory } from "../_Components/FoodCategory";
 
 const FoodMenu = () => {
   return (
@@ -11,6 +10,7 @@ const FoodMenu = () => {
       ></img>
 
       <DishCategory />
+      <FoodCategory />
     </div>
   );
 };
