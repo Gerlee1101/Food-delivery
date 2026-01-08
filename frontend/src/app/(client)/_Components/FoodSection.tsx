@@ -8,7 +8,7 @@ export const foods = [
     name: "Cheese Burger",
     product_description:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    image: "/appetizers/4ff51a14c041fc57196ebf52f07e524b5e4cc98c.png",
+    image: "/4ff51a14c041fc57196ebf52f07e524b5e4cc98c.png",
   },
   {
     id: 2,
@@ -17,6 +17,7 @@ export const foods = [
     name: "Pepperoni",
     product_description:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    image: "/4ff51a14c041fc57196ebf52f07e524b5e4cc98c.png",
   },
   {
     id: 3,
@@ -25,6 +26,7 @@ export const foods = [
     name: "Cheese Burger",
     product_description:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    image: "/4ff51a14c041fc57196ebf52f07e524b5e4cc98c.png",
   },
   {
     id: 4,
@@ -33,6 +35,8 @@ export const foods = [
     name: "Pepperoni",
     product_description:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    image:
+      "/20240831035110-andy-20cooks-20-20juicy-20beef-20burger-20recipe.webp",
   },
   {
     id: 5,
@@ -41,6 +45,7 @@ export const foods = [
     name: "Cheese Burger",
     product_description:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    image: "/Pepperoni-Pizza-1-500x500.jpg",
   },
   {
     id: 6,
@@ -49,6 +54,7 @@ export const foods = [
     name: "Pepperoni",
     product_description:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    image: "/SambalFriedChickenBurger1.webp",
   },
 ];
 export const FoodSection = () => {
@@ -63,6 +69,7 @@ export const FoodSection = () => {
                 title={el.title}
                 price={el.price}
                 id={el.id}
+                image={el.image}
                 product_description={el.product_description}
                 name={el.name}
                 key={el.id}

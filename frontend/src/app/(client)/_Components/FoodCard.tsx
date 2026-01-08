@@ -20,6 +20,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { FoodDetail } from "./FoodDetail";
 
 export type FoodCardProps = {
   id: number;
@@ -29,6 +38,7 @@ export type FoodCardProps = {
   name: string;
   className?: string;
   product_description: string;
+  image: string;
 };
 
 export const FoodCard = ({
@@ -36,6 +46,7 @@ export const FoodCard = ({
   //   backdrop_path,
   name,
   title,
+  image,
   price,
   product_description,
 }: FoodCardProps) => {
@@ -66,169 +77,40 @@ export const FoodCard = ({
   };
   const totalPrice = price * quantity;
   return (
-    <div className="relative w-full">
-      <div className="absolute ">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Go Back"
-              className="absolute z-10 top-80 right-10 rounded-full"
-              onClick={handleClick}
-            >
-              {checked ? <Check /> : <Plus />}
-            </Button>
-          </PopoverTrigger>
-          {checked ? (
-            <PopoverContent className="w-80">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <h4 className="leading-none font-medium">
-                    Food is being added to the cart!
-                  </h4>
-                </div>
-              </div>
-            </PopoverContent>
-          ) : (
-            <PopoverContent className="w-80">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <h4 className="leading-none font-medium">
-                    Food is being deleted to the cart!
-                  </h4>
-                </div>
-              </div>
-            </PopoverContent>
-          )}
-        </Popover>
-      </div>
-      <div className="w-full ">
-        <Dialog>
-          <form>
-            <DialogTrigger asChild>
-              <Button variant="outline" className=" p-0">
-                <div className="bg-white rounded-lg pt-5 pl-5 pr-5 pb-5 cursor-pointer">
-                  <div key={id} className="rounded-lg overflow-hidden ">
-                    <FoodImage
-                      title={title}
-                      className="w-full h-100 rounded-lg"
-                    />
-
-                    <div className="w-full p-3 h-27">
-                      <div className="flex gap-1 items-center justify-between">
-                        <p className="text-[24px] font-semibold text-red-500 pb-1">
-                          {name}
-                        </p>
-                        ${price}
-                      </div>
-                      <p className="text-lg line-clamp-2">
-                        {product_description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="min-w-2xl grid grid-cols-2">
-              <FoodImage title={title} className="rounded-lg aspect-square" />
-              <div className="pt-5 flex flex-col justify-between">
+    <Card className="relative">
+      <CardContent>
+        <div className="relative">
+          <img
+            src={image}
+            className="w-full h-96 rounded-2xl object-cover  bg-amber-600"
+          />
+          <Dialog>
+            <form>
+              <DialogTrigger asChild>
+                <Button
+                  variant="default"
+                  size={"icon-lg"}
+                  className="w-12 h-12 rounded-full bg-white border absolute bottom-8 right-5"
+                >
+                  <Plus color="#EF4444" strokeWidth={4} />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="w-full">
                 <DialogHeader>
-                  <DialogTitle className="text-red-500 text-[30px] font-semibold">
-                    {name}
-                  </DialogTitle>
-                  <DialogDescription className="text-black">
-                    Fluffy pancakes stacked with fruits, cream, syrup, and
-                    powdered sugar.
-                  </DialogDescription>
+                  <DialogTitle>Add new Food</DialogTitle>
                 </DialogHeader>
-                <div className="flex justify-between pt-18 ">
-                  <div>
-                    <p>Total price</p>
-                    <p>${totalPrice}</p>
-                  </div>
-
-                  <div className="flex justify-between items-center gap-3">
-                    <Button
-                      variant="outline"
-                      className="rounded-full h-10"
-                      onClick={decrease}
-                    >
-                      -
-                    </Button>
-                    <p> {quantity} </p>
-                    <Button
-                      variant="outline"
-                      className="rounded-full h-10"
-                      onClick={increase}
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <DialogFooter className="">
-                  <Button type="submit" className="w-full rounded-full">
-                    Add to cart
-                  </Button>
-                </DialogFooter>
-              </div>
-            </DialogContent>
-          </form>
-        </Dialog>
-      </div>
-
-      {/* <div className="bg-white rounded-lg  pt-5 pl-5 pr-5 pb-5 relative">
-        <div
-          key={id}
-          className="relative rounded-lg overflow-hidden flex flex-col items-center"
-        >
-          <FoodImage title={title} className=" w-full h-100  rounded-lg " />
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label="Go Back"
-                className="absolute top-80 right-10 rounded-full"
-                onClick={handleClick}
-              >
-                {checked ? <Check /> : <Plus />}
-              </Button>
-            </PopoverTrigger>
-            {checked ? (
-              <PopoverContent className="w-80">
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <h4 className="leading-none font-medium">
-                      Food is being added to the cart!
-                    </h4>
-                  </div>
-                </div>
-              </PopoverContent>
-            ) : (
-              <PopoverContent className="w-80">
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <h4 className="leading-none font-medium">
-                      Food is being deleted to the cart!
-                    </h4>
-                  </div>
-                </div>
-              </PopoverContent>
-            )}
-          </Popover>
-
-          <div className="w-full p-3  h-27 ">
-            <div className="flex gap-1 items-center justify-between">
-              <p className="text-[24px] font-semibold text-red-500 pb-1">
-                {name}
-              </p>
-              ${price}
-            </div>
-            <p className="text-lg">{product_description}</p>
-          </div>
+              </DialogContent>
+            </form>
+          </Dialog>
         </div>
-      </div> */}
-    </div>
+        <div className="flex justify-between items-center pt-5">
+          <div className="text-red-500 font-semibold text-2xl">{name}</div>
+          <div>{price}</div>
+        </div>
+        <div>
+          <p>{product_description}</p>
+        </div>
+      </CardContent>
+    </Card>
   );
 };

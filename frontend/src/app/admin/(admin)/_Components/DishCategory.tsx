@@ -1,5 +1,7 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const foodData: Foods[] = [
   {
@@ -52,21 +54,31 @@ export type Foods = {
   category: string;
   number: number;
 };
+const [selectedCategory, setSelectedCategory] = useState<string>("All dishes");
 export const DishCategory = () => {
   return (
     <div className="w-full pt-16 ">
       <div className="w-full rounded-md  bg-white p-6">
         <h6 className="font-semibold pb-6">Dishes category</h6>
         <div className="w-full flex flex-wrap gap-5 ">
-          {foodData.map((el, i) => (
-            <Button
-              key={el.category + i}
-              variant="outline"
-              className="rounded-2xl"
-            >
-              {el.category} <Badge>{el.number}</Badge>
-            </Button>
-          ))}
+          {foodData.map((el) => {
+            const isSelected = selectedCategory === el.category;
+
+            return (
+              <Button
+                key={el.category}
+                variant="outline"
+                onClick={() => setSelectedCategory(el.category)}
+                className={`
+                  rounded-2xl
+                  ${isSelected ? "border-red-500 text-red-500" : ""}
+                `}
+              >
+                {el.category}
+                <Badge className="ml-2">{el.number}</Badge>
+              </Button>
+            );
+          })}
         </div>
       </div>
     </div>

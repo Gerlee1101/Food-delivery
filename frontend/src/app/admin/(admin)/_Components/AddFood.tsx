@@ -25,7 +25,7 @@ export const AddFood = () => {
     <>
       <Card className="w-full max-w-sm rounded-4xl">
         <CardContent>
-          <div className="flex flex-col items-center p-20 gap-5 justify-center">
+          <div className="flex flex-col items-center p-18 gap-5 justify-center">
             <Dialog>
               <form>
                 <DialogTrigger asChild>
@@ -37,9 +37,9 @@ export const AddFood = () => {
                     <Plus className="text-white" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-106.25">
+                <DialogContent className="w-full">
                   <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>Add new Food</DialogTitle>
                   </DialogHeader>
                   <DishesInfo />
                 </DialogContent>
