@@ -1,0 +1,8 @@
+import type { RequestHandler } from "express";
+import { CategoryModel } from "../../database/schema/category.schema.js";
+
+export const getCategories: RequestHandler = async (req, res) => {
+  const body = req.body;
+  const categories = await CategoryModel.find({});
+  res.status(201).json(categories);
+};
